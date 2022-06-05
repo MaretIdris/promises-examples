@@ -143,7 +143,7 @@ main1();
   
   // If you only care about successful Promise completions:
  
-   resolveFn(payloadToReturn) // you can also wrap this into setTimeout()
+   resolveFn(payloadToReturn) // you can also wrap this into setTimeout(). resolveFn() is provided by the Promise constructor.
   
   // If you only care about errored out Promise completions:
   rejectFn("error message to return")
