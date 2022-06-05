@@ -93,6 +93,11 @@ main1();
 
 ![](src/promises-cheat-sheet.jpg)
 
+## What is a Promise?
+- Promise is a JavaScript's standard built-in object. Find out other [standard built-in objects on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects).
+- Promise object has methods like reject(), resolve(), race() etc. we can call to do different
+  things with the returned promise. 
+
 ## Overview of Promises
 
 - Promises have two sections to think about:
@@ -141,25 +146,37 @@ main1();
 ``` typescript
   const promise = new Promise((resolveFn, rejectFn) => {
   
-  // If you only care about successful Promise completions:
- 
-   resolveFn(payloadToReturn) // you can also wrap this into setTimeout(). resolveFn()/resolve() is provided by the Promise constructor.
+    // If you only care about successful Promise completions:
   
-  // If you only care about errored out Promise completions:
-  rejectFn("error message to return")  // rejectFn()/reject() is provided by the Promise constructor.
-  
-  // Want to imitate a network call? Wrap resolveFn or rejectFn into 
-  // setTimeout() 
-  setTimeout(() => {
-    resolveFn(payload to return)
-  }, 2000);
+    resolveFn(payloadToReturn) // you can also wrap this into setTimeout(). resolveFn()/resolve() is provided by the Promise constructor.
+    
+    // If you only care about errored out Promise completions:
+    rejectFn("error message to return")  // rejectFn()/reject() is provided by the Promise constructor.
+
+    // -------------------------------------
+    
+    // Want to imitate a network call? Wrap resolveFn or rejectFn into setTimeout() 
+    setTimeout(() => resolveFn(payloadToReturn), 2000);
   })
 ```
 
+## Little more about resolveFn() and rejectFn()
+- `resolveFn()` and `rejectFn()` are methods on the Promise object.
+
+### resolveFn()
+- resolveFn(value/payload) is called when the Promise is resolved.
+- **From the Promise src docs:** resolveFn(value) takes one argument `value` (I referred to value as
+  `payloadToReturn` in the above sample code) with type `T | PromiseLike<T>`. You can read more details
+  by pressing `Mod + b` on the Promise on your keyboard (this doesn't work for everyone. This is my
+  keyboard configuration). 
+
+### rejectFn()
+- rejectFn(reason) is called when the Promise is rejected.
+- rejectFn(reason) takes a single argument `reason` with type `any`. 
+
 ## Another way to make Promises
 
-- We can use Promise.resolve() and Promise.reject() methods to make immediately
-  resolving Promises.
+- We can use Promise.resolve() and Promise.reject() methods.
 - **Promise.resolve(payload)**
   - `PromiseState` will be immediately "fulfilled"
     and `PromiseResult` will be the payload.

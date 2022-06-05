@@ -51,7 +51,7 @@ function main1() {
     .finally(() => {
       let endTime = new Date().getTime();
       const totalTime = (endTime - startTime) / 1000;
-      console.log("Total time: ", totalTime);
+      console.log(`Total time: ${totalTime}seconds`);
     });
 }
 
