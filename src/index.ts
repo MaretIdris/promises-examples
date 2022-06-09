@@ -17,7 +17,7 @@ const executorFnWhichResolves = (resolve: ResolveFn): void => {
 const executorFnWhichRejects = (_: ResolveFn, reject: RejectFn) => {
   /* do something that takes time, and then call reject */
   setTimeout(() => {
-    reject(new Error("this promise failed"));
+    reject(new Error("This is where you can write your promise error ---> this promise failed"));
     // reject("bla bla bla");
   }, 2000);
 };
@@ -26,10 +26,10 @@ const executorFnWhichRejects = (_: ResolveFn, reject: RejectFn) => {
  * Calling functions below
  * */
 
-main1();
+// main1();
 // await main2();
 // await main3();
-// await main4();
+await main4();
 
 /*
  * PROMISES EXAMPLES
@@ -40,7 +40,10 @@ main1();
 function main1() {
   let startTime = new Date().getTime();
 
+  // Comment out one of the Promise creations below:
   const promise = new Promise(executorFnWhichResolves);
+  // const promise = new Promise(executorFnWhichRejects);
+
   promise
     .then((value) => {
       console.log(value);
@@ -66,7 +69,7 @@ async function main2() {
 
   try {
     const unwrappedPromise = await promiseIMade;
-    console.log("Promise got fulfilled:");
+    console.log("Promise got fulfilled using async/await:");
     console.log(unwrappedPromise);
   } catch (error) {
     console.log("Promise got rejected: ");
@@ -74,7 +77,7 @@ async function main2() {
   } finally {
     let endTime = new Date().getTime();
     const totalTime = (endTime - startTime) / 1000;
-    console.log("Total time: ", totalTime);
+    console.log(`Total time: ${totalTime}seconds`);
   }
 }
 
@@ -91,17 +94,17 @@ async function main3() {
 
     try {
       const unwrappedPromise = await promise;
-      console.log("Promise got fulfilled:");
+      console.log("Promise got fulfilled sequentially:");
       console.log(unwrappedPromise);
     } catch (error) {
-      console.log("Promise got rejected: ");
+      console.log("Promise got rejected sequentially: ");
       console.log(error);
     }
   }
 
   let endTime = new Date().getTime();
   const totalTime = (endTime - startTime) / 1000;
-  console.log("Total time: ", totalTime);
+  console.log(`Total time: ${totalTime}seconds`);
 }
 
 /*
@@ -123,10 +126,11 @@ async function main4() {
 
   let endTime = new Date().getTime();
   const totalTime = (endTime - startTime) / 1000;
-  console.log("Total time: ", totalTime);
+  console.log(`Total time: ${totalTime}seconds`);
 }
 
 async function unWrapPromises(promisesArray: Promise<FutureValue>[]) {
+  // Await for all promises to settle.
   const allSettledPromises = await Promise.allSettled(promisesArray);
   // The if statement in the loop is the one checking for successful
   // or rejected Promise completion.

@@ -11,16 +11,23 @@ with [DocToc](https://github.com/thlorenz/doctoc)*
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+# About the project
+- This code runs on the client side in the browser (aka the browser runs the JS code).
+- `npm run start` runs the application in development mode using Webpack dev server.
+
 ## Run the project
 
-1. `npm install` to install all the repo dependencies.
-2. `npm run start` to start the app. This script deletes Webpack generated
+1. In your terminal run `npm install` to install all the repo dependencies.
+2. Then run `npm run start` to start the app. This script deletes Webpack generated
    `dist/` folder and then uses Webpack to regenerate it again.
+3. Open a browser and go to `http://localhost:9871/`. The page will appear empty. Open up Chrome Dev
+   Tools (right click and select `inspect`). Then click on the `Console` tab in Chrome Dev Tools.
+   The data dump will appear in the console.
 
 ## Change the port
 
-The project will start running on port 9000. If you want to change the port
-open `webpack.config.js` and find the `port:9000` and change it from there.
+The project will start running on port 9871. If you want to change the port
+open `webpack.config.js` and find the `port:9871` and change it from there.
 
 ```json
 module.exports = {
@@ -32,7 +39,7 @@ module.exports = {
       )
     },
     compress: true,
-    port: 9000
+    port: 9871
   }
 }
 ```
